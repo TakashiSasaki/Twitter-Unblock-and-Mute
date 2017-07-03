@@ -40,7 +40,7 @@ function authCallback(request) {
 }
 
 function getBlockedUsers(){
-  var json_string = CacheService.getScriptCache().get("users");
+  var json_string = CacheService.getUserCache().get("users");
   if(json_string) {
     var json_object = JSON.parse(json_string);
     return json_object;
@@ -63,7 +63,7 @@ function fetchBlockedUsers(cursor, users){
     var user = [o.users[i].id_str, o.users[i].screen_name, o.users[i].description];
     users.push(user);
   }
-  CacheService.getScriptCache().put("users", JSON.stringify(users), 21600);
+  CacheService.getUserCache().put("users", JSON.stringify(users), 21600);
   if(o.next_cursor_str) {
     Logger.log(o.next_cursor_str);
     return fetchBlockedUsers(o.next_cursor_str, users);
@@ -87,16 +87,16 @@ function mute(user_id){
 }
 
 function removeLastUser(){
-  var json_string = CacheService.getScriptCache().get("users");
+  var json_string = CacheService.getUserCache().get("users");
   var users = JSON.parse(json_string);
   users.pop();
   if(users.length==0){
-    CacheService.getScriptCache().remove("users");
+    CacheService.getUserCache().remove("users");
     return;
   }
-  CacheService.getScriptCache().put("users", JSON.stringify(users), 21600);
+  CacheService.getUserCache().put("users", JSON.stringify(users), 21600);
 }
 
 function clearCache(){
-  CacheService.getScriptCache().remove("users");
+  CacheService.getUserCache().remove("users");
 }
