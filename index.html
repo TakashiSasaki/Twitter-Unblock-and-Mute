@@ -1,0 +1,98 @@
+<button onclick="authorize()">authorize to gain access to the block list in your Twitter account.</button>
+<script>
+function authorize(){
+  google.script.run.withSuccessHandler(function(authorization_url){
+    window.open(authorization_url, "_blank");
+  }).withFailureHandler(function(e){
+    alert(e);
+  }).getAuthorizationUrl();
+}
+</script>
+<button onclick="hasAccess()">check for authorization</button>
+<script>
+function hasAccess(){
+  google.script.run.withSuccessHandler(function(e){
+    alert(e);
+  }).withFailureHandler(function(e){
+    alert(e);
+  }).hasAccess();
+}
+</script>
+
+<div id="fetchBlockedUsers">
+<button onclick="fetchBlockedUsers()">fetch blocked users</button>
+<button onclick="getBlockedUsers()">get blocked users</button>
+<textarea readonly></textarea>
+</div>
+<script>
+function fetchBlockedUsers(){
+  $("#list textarea").text("");
+  google.script.run.withSuccessHandler(function(e){
+    $("#fetchBlockedUsers textarea").text(JSON.stringify(e));
+  }).withFailureHandler(function(e){
+    $("#fetchBlockedUsers textarea").text(e);
+  }).fetchBlockedUsers();
+}
+function getBlockedUsers(){
+  $("#list textarea").text("");
+  google.script.run.withSuccessHandler(function(e){
+    $("#fetchBlockedUsers textarea").text(JSON.stringify(e));
+  }).withFailureHandler(function(e){
+    $("#fetchBlockedUsers textarea").text(e);
+  }).getBlockedUsers();
+}
+</script>
+
+<div id="unblock">
+<input placeholder="user_id"/>
+<button onclick="unblock()">unblock</button>
+</div>
+<script>
+function unblock(){
+  google.script.run.withSuccessHandler(function(e){
+    alert(e);
+  }).withFailureHandler(function(e){
+    alert(e);
+  }).unblock($("#unblock input").val());
+}
+</script>
+
+<div id="mute">
+<input placeholder="user_id"/>
+<button onclick="mute()">mute</button>
+</div>
+<script>
+function mute(){
+  google.script.run.withSuccessHandler(function(e){
+    alert(e);
+  }).withFailureHandler(function(e){
+    alert(e);
+  }).mute($("#mute input").val());
+}
+</script>
+
+<div id="unblockAndMute">
+<button onclick="unblockAndMute()">unblockAndMute</button>
+</div>
+<script>
+function unblockAndMute(){
+  google.script.run.withSuccessHandler(function(e){
+    alert(e);
+  }).withFailureHandler(function(e){
+    alert(e);
+  }).unblockAndMute();
+}
+</script>
+
+<div id="getLastExecutionDate">
+<button onclick="getLastExecutionDate()">getLastExecutionDate</button>
+</div>
+<script>
+function getLastExecutionDate(){
+  google.script.run.withSuccessHandler(function(e){
+    alert(e);
+  }).withFailureHandler(function(e){
+    alert(e);
+  }).getLastExecutionDate();
+}
+</script>
