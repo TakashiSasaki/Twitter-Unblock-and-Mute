@@ -1,3 +1,7 @@
+<div id="effective_user">
+  <label>effective user</label> <input  value="<?=Session.getEffectiveUser().getEmail()?>" readonly>
+</div>
+
 <button onclick="authorize()">authorize to gain access to the block list in your Twitter account.</button>
 <script>
 function authorize(){

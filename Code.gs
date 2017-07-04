@@ -43,6 +43,8 @@ function getBlockedUsers(){
   var json_string = CacheService.getUserCache().get("users");
   if(json_string) {
     var json_object = JSON.parse(json_string);
+    Logger.log(typeof json_object);
+    Logger.log(json_object.length);
     return json_object;
   } else {
     return fetchBlockedUsers();
@@ -92,9 +94,10 @@ function removeLastUser(){
   users.pop();
   if(users.length==0){
     CacheService.getUserCache().remove("users");
-    return;
+    return 0;
   }
   CacheService.getUserCache().put("users", JSON.stringify(users), 21600);
+  return users.length;
 }
 
 function clearCache(){
