@@ -1,4 +1,3 @@
-
 function getScreenName(){
   var screen_name = CacheService.getUserCache().get("screen_name");
   if(screen_name) return screen_name;

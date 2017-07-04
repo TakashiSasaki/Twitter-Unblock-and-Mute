@@ -5,10 +5,11 @@ function unblockAndMute() {
   CacheService.getUserCache().put("unblockAndMute", JSON.stringify([new Date(), Session.getActiveUser().getEmail(), Session.getEffectiveUser().getEmail(), Session.getTemporaryActiveUserKey()]));
   Logger.log(user);
   var user_id = user[0];
+  var screen_name = user[1];
   mute(user_id);
   unblock(user_id);
   removeLastUser();
-  sendDirectMessage("Unblocked and muted " + user_id);
+  sendDirectMessage("Unblocked and muted " + "@" + screen_name + "(user_id=" + user_id +")");
   return user;
 }
 

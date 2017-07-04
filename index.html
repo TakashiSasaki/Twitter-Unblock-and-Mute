@@ -1,6 +1,5 @@
-<div id="effective_user">
-  <label>effective user</label> <input  value="<?=Session.getEffectiveUser().getEmail()?>" readonly>
-</div>
+<label>effective user </label><input  value="<?=Session.getEffectiveUser().getEmail()?>" readonly>
+<label>screen name </label><input value="<?=getScreenName()?>" readonly>
 
 <button onclick="authorize()">authorize to gain access to the block list in your Twitter account.</button>
 <script>
@@ -23,26 +22,32 @@ function hasAccess(){
 }
 </script>
 
-<div id="fetchBlockedUsers">
-<button onclick="fetchBlockedUsers()">fetch blocked users</button>
-<button onclick="getBlockedUsers()">get blocked users</button>
-<textarea readonly></textarea>
+<div id="blocked_users">
+  <button onclick="fetchBlockedUsers()">fetch blocked users</button>
+  <button onclick="getBlockedUsers()">get blocked users</button>
+  <textarea readonly></textarea>
+  <label>the number of cached users </label><input readonly>
 </div>
 <script>
+$(getBlockedUsers());
 function fetchBlockedUsers(){
-  $("#list textarea").text("");
+  $("#blocked_users textarea").text("");
+  $("#blocked_users input").val("");
   google.script.run.withSuccessHandler(function(e){
-    $("#fetchBlockedUsers textarea").text(JSON.stringify(e));
+    $("#blocked_users textarea").text(JSON.stringify(e));
+    $("#blocked_users input").val(e.length);
   }).withFailureHandler(function(e){
-    $("#fetchBlockedUsers textarea").text(e);
+    $("#blocked_users textarea").text(e);
   }).fetchBlockedUsers();
 }
 function getBlockedUsers(){
-  $("#list textarea").text("");
+  $("#blocked_users textarea").text("");
+  $("#blocked_users input").val("");
   google.script.run.withSuccessHandler(function(e){
-    $("#fetchBlockedUsers textarea").text(JSON.stringify(e));
+    $("#blocked_users textarea").text(JSON.stringify(e));
+    $("#blocked_users input").val(e.length);
   }).withFailureHandler(function(e){
-    $("#fetchBlockedUsers textarea").text(e);
+    $("#blocked_users textarea").text(e);
   }).getBlockedUsers();
 }
 </script>
