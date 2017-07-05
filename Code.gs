@@ -45,6 +45,9 @@ function getBlockedUsers(){
     var json_object = JSON.parse(json_string);
     Logger.log(typeof json_object);
     Logger.log(json_object.length);
+    if(json_object.length == 0) {
+      return fetchBlockedUsers();
+    }
     return json_object;
   } else {
     return fetchBlockedUsers();

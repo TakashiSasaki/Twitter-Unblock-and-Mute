@@ -9,10 +9,16 @@ function unblockAndMute() {
   mute(user_id);
   unblock(user_id);
   removeLastUser();
-  sendDirectMessage("Unblocked and muted " + "@" + screen_name + "(user_id=" + user_id +")");
+  //sendDirectMessage("Unblocked and muted " + "@" + screen_name + " (user_id=" + user_id +")");
+  sendDirectMessage("Unblocked and muted @" + screen_name + " " + user_id );
   return user;
 }
 
 function getLastExecutionDate(){
   return CacheService.getUserCache().get("unblockAndMute");
+}
+
+function installTrigger(minutes){
+  TriggerUtility.deleteTriggers("unblockAndMute");
+  TriggerUtility.installEveryMinutesTrigger("unblockAndMute", minutes);
 }

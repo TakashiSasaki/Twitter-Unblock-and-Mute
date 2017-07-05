@@ -105,3 +105,19 @@ function getLastExecutionDate(){
   }).getLastExecutionDate();
 }
 </script>
+
+<div class="row">
+  <button class="btn" onclick="installTrigger(5)">install 5-min trigger</button>
+  <button class="btn" onclick="installTrigger(15)">install 15-min trigger</button>
+  <button class="btn" onclick="installTrigger(30)">install 30-min trigger</button>
+  <button class="btn" onclick="installTrigger(60)">install 60-min trigger</button>
+</div>
+<script>
+  function installTrigger(minutes){
+    google.script.run.withSuccessHandler(function(e){
+      alert("succeeded");
+    }).withFailureHandler(function(e){
+      alert(e);
+    }).installTrigger(minutes);
+  }
+</script>
